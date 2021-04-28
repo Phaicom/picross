@@ -1,1 +1,1 @@
-yarn commitlint -E $1
+npx --no-install commitlint --edit "$1"
