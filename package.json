@@ -11,7 +11,8 @@
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
     "test": "jest",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
