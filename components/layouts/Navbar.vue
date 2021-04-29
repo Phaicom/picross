@@ -11,11 +11,11 @@ header.header.header-fixed
         li 
           a(href='#home') Home
         li 
-          a(href='#home') About
+          a(href='#about') About
         li 
-          a(href='#home') Portfolio
+          a(href='#portfolio') Portfolio
         li 
-          a(href='#home') Contacts
+          a(href='#contacts') Contacts
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
