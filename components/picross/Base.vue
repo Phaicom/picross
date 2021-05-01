@@ -7,30 +7,35 @@
       :checkbox='true'
     ) Select
     CommonButton(
+      @click.native='changeSelector("guess")',
+      :selected='selector === "guess"',
+      :checkbox='true'
+    ) Guess
+    CommonButton(
       @click.native='changeSelector("cross")',
       :selected='selector === "cross"',
       :checkbox='true'
     ) Mark
     CommonButton(@click.native='clearGrids') Clear
-  PicrossHints(
-    :hints='getHint(false, answer)',
-    :gridsAns='getHintGrids(false)'
-  )
-  .picross-body
+  .hint-grids
     PicrossHints(
-      :hints='getHint(true, answer)',
-      :isLeft='true',
-      :gridsAns='getHintGrids(true)'
+      :hints='getHint(false, answer)',
+      :gridsAns='getHintGrids(false)'
     )
-    PicrossGrids(
-      :width='width',
-      :height='height',
-      :selector='selector',
-      :isClear='isClear',
-      :isWin='isWin',
-      @grids='onGrids'
-    )
-  CommonButton.check-button(@click.native='check') Check
+    .picross-body
+      PicrossHints(
+        :hints='getHint(true, answer)',
+        :isLeft='true',
+        :gridsAns='getHintGrids(true)'
+      )
+      PicrossGrids(
+        :width='width',
+        :height='height',
+        :selector='selector',
+        :isClear='isClear',
+        :isWin='isWin',
+        @grids='onGrids'
+      )
 </template>
 
 <script lang="ts">
@@ -130,6 +135,7 @@ export default defineComponent({
 .base-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   .selector-group {
     margin-bottom: 20px;
@@ -143,10 +149,24 @@ export default defineComponent({
     margin-top: 20px;
   }
 
-  .picross-body {
+  .hint-grids {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: max-content;
+
+    & > * {
+      display: flex;
+      width: auto;
+      justify-content: flex-end;
+    }
+
+    .picross-body {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
   }
 }
 </style>

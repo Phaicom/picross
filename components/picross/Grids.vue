@@ -5,7 +5,7 @@
       .grid(
         v-for='(row, j) in col',
         @click='selectBox(i, j)',
-        :class='{ "win-selected": row === 1 && isWin, selected: row === 1 && !isWin, cross: row === 2, hover: isHover[0] === i && isHover[1] === j && !isWin, "hover-related": (isHover[0] === i || isHover[1] === j) && !isWin }',
+        :class='{ "win-selected": row === 1 && isWin, selected: row === 1 && !isWin, cross: row === 2, guess: row === 3, hover: isHover[0] === i && isHover[1] === j && !isWin, "hover-related": (isHover[0] === i || isHover[1] === j) && !isWin }',
         @mouseover='mouseOver(i, j)'
       )
 </template>
@@ -61,6 +61,8 @@ export default defineComponent({
         grids.value[col][row] = 0
       } else if (props.selector === 'cross') {
         grids.value[col][row] = 2
+      } else if (props.selector === 'guess') {
+        grids.value[col][row] = 3
       } else {
         grids.value[col][row] = 1
       }
@@ -167,7 +169,7 @@ export default defineComponent({
           height: 2px;
           left: 0;
           top: 50%;
-          background-color: black;
+          background-color: lightcoral;
         }
 
         &::before {
@@ -176,6 +178,22 @@ export default defineComponent({
 
         &::after {
           transform: rotate(-45deg);
+        }
+      }
+
+      &.guess {
+        background-color: inherit !important;
+
+        &::after {
+          content: ' ';
+          position: absolute;
+          width: 80%;
+          height: 80%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 2px solid steelblue;
+          border-radius: 50%;
         }
       }
 
