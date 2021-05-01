@@ -19,14 +19,7 @@ export default defineComponent({
     const isWin = ref(false)
 
     onMounted(() => {
-      const ans = [
-        [1, 1, 0, 0, 0],
-        [1, 1, 1, 1, 0],
-        [1, 0, 0, 0, 1],
-        [1, 1, 0, 0, 1],
-        [1, 0, 1, 1, 1],
-      ]
-      answer.value = ans
+      generate(5, 5)
     })
 
     const onIsWin = (iw: boolean) => {
