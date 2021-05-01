@@ -1643,6 +1643,14 @@
     consola "^2.15.3"
     defu "^3.2.2"
 
+"@nuxtjs/color-mode@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-2.0.5.tgz#79a5c70384bd245ebc9c6499e9dac5ded301c54b"
+  integrity sha512-upPCVTLQ2vZGvOjt0geLanPSS+ailgFRjqRsCUcbCQOwEesEO/zoLmbWBO35t3lV5nRXF7CLCX65KwBiogXE9g==
+  dependencies:
+    defu "^3.2.2"
+    lodash.template "^4.5.0"
+
 "@nuxtjs/composition-api@^0.23.3":
   version "0.23.3"
   resolved "https://registry.yarnpkg.com/@nuxtjs/composition-api/-/composition-api-0.23.3.tgz#322c4b2fb220cf6b0dc5526cda6aca8d9fee193f"

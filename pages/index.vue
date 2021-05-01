@@ -1,25 +1,31 @@
 <template lang="pug">
 .container
-  div
-    Logo
-    h1.title orga-board
-    .links
-      a.button--green(
-        href='https://nuxtjs.org/',
-        target='_blank',
-        rel='noopener noreferrer'
-      ) Documentation
-      a.button--grey(
-        href='https://github.com/nuxt/nuxt.js',
-        target='_blank',
-        rel='noopener noreferrer'
-      ) GitHub
+  PicrossBase(:answer='answer')
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
 
-export default Vue.extend({})
+export default defineComponent({
+  setup() {
+    const answer = ref<number[][]>([[]])
+
+    onMounted(() => {
+      const ans = [
+        [1, 1, 0, 0, 0],
+        [1, 1, 1, 1, 0],
+        [1, 0, 0, 0, 1],
+        [1, 1, 0, 0, 1],
+        [1, 0, 1, 1, 1],
+      ]
+      answer.value = ans
+    })
+
+    return {
+      answer,
+    }
+  },
+})
 </script>
 
 <style lang="scss" scoped>
@@ -33,7 +39,7 @@ export default Vue.extend({})
 
   .title {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 2rem;
   }
 }
 </style>

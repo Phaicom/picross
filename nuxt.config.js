@@ -7,7 +7,14 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -18,7 +25,7 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/theme.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -55,6 +62,8 @@ export default {
       },
     ],
     '@nuxtjs/style-resources',
+    // https://color-mode.nuxtjs.org/
+    '@nuxtjs/color-mode',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -69,4 +78,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  colorMode: {
+    preference: 'light',
+  },
 }
