@@ -72,6 +72,19 @@ body {
   color: #383a42;
 }
 
+@media screen and (max-width: 425px) and (orientation: portrait) {
+  .layout-container {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: scroll !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
 .layout-container {
   background: linear-gradient(
     90deg,
@@ -118,6 +131,10 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+
+    @include media('<=phone') {
+      display: none;
+    }
   }
 }
 </style>
