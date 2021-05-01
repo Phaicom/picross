@@ -130,6 +130,10 @@ export default defineComponent({
       border-bottom: 1px solid var(--primary-color);
     }
 
+    &:nth-child(6n) {
+      border-top: 1px solid var(--primary-color);
+    }
+
     .grid {
       width: 40px;
       height: 40px;
@@ -138,6 +142,10 @@ export default defineComponent({
 
       &:not(:last-child) {
         border-right: 1px solid var(--primary-color);
+      }
+
+      &:nth-child(6n) {
+        border-left: 1px solid var(--primary-color);
       }
 
       &.win-selected {
@@ -173,10 +181,18 @@ export default defineComponent({
 
       &.hover-related {
         background-color: #fbcccc;
+
+        @include media('<=phone') {
+          background-color: transparent;
+        }
       }
 
       &.hover {
         background-color: #ffa5b0;
+
+        @include media('<=phone') {
+          background-color: transparent;
+        }
       }
     }
   }
