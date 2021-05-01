@@ -7,7 +7,7 @@ div
       Nuxt
 </template>
 
-<script lang="ts">
+<script>
 import {
   defineComponent,
   inject,
