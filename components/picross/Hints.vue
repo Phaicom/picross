@@ -2,7 +2,7 @@
 div
   .hints-container(:class='{ left: isLeft }')
     .hints(v-for='(hint, i) in hintsReverse') 
-      .hint(v-for='(h, j) in hint', :class='{ completed: checkHint(i, j) }') {{ h }}
+      .hint(v-for='(h, j) in hint', :class='{ completed: checkHint(i) }') {{ h }}
 </template>
 
 <script lang="ts">
@@ -23,15 +23,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const checkHint = (i: number, j: number) => {
+    const checkHint = (i: number) => {
       try {
         const gs = JSON.parse(JSON.stringify(props.gridsAns))
-
-        if (gs[i].reverse()[j] === hintsReverse.value[i][j]) {
-          return true
-        } else {
-          return false
-        }
+        const arr1 = JSON.stringify(gs[i].reverse())
+        const arr2 = JSON.stringify(hintsReverse.value[i])
+        return arr1 === arr2
       } catch (error) {
         return false
       }
@@ -64,7 +61,7 @@ export default defineComponent({
     flex-direction: column-reverse;
     justify-content: flex-start;
     align-items: center;
-    width: 50px;
+    width: 40px;
 
     .hint.completed {
       text-decoration: line-through;

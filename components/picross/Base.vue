@@ -1,8 +1,5 @@
 <template lang="pug">
 .base-container
-  .base-header
-    h1.title {{ title }}
-    h3.sub-title(v-show='isWin') You're the WINNER!! 😍✨🔥
   .selector-group
     CommonButton(
       @click.native='changeSelector("select")',
@@ -52,11 +49,10 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const width = ref(0)
     const height = ref(0)
     const selector = ref('select')
-    const title = ref('Picross')
     const isClear = ref(false)
     const isWin = ref(false)
     const grids = ref<number[][]>([[]])
@@ -79,6 +75,7 @@ export default defineComponent({
       const arr1 = JSON.stringify(grids.value)
       const arr2 = JSON.stringify(props.answer)
       isWin.value = arr1 === arr2
+      emit('isWin', isWin.value)
     }
 
     const setupGrids = () => {
@@ -118,7 +115,6 @@ export default defineComponent({
       setupGrids,
       getHint,
       getHintGrids,
-      title,
       isWin,
     }
   },
@@ -135,10 +131,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
 
-  .base-header {
-    margin-bottom: 20px;
-  }
-
   .selector-group {
     margin-bottom: 20px;
 
@@ -154,6 +146,7 @@ export default defineComponent({
   .picross-body {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
   }
 }
 </style>

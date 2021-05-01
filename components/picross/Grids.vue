@@ -105,12 +105,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .grids-container {
-  margin: 0 auto;
-  width: 100%;
+  margin: 0 0;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   text-align: center;
   flex-direction: column;
 
@@ -132,8 +131,8 @@ export default defineComponent({
     }
 
     .grid {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       position: relative;
       transition: all 0.2s ease;
 

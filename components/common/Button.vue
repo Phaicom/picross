@@ -35,7 +35,7 @@ button {
   user-select: none;
 
   &.checkbox {
-    color: var(--tertiary-color);
+    color: gray;
   }
 
   &:hover,
