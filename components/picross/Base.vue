@@ -87,8 +87,8 @@ export default defineComponent({
       date.value = DateTime.fromISO('2016-05-25')
     }
 
-    const startTimer = async () => {
-      interval.value = await setInterval(function () {
+    const startTimer = () => {
+      interval.value = setInterval(function () {
         date.value = date.value.plus({ seconds: 1 })
       }, 1000)
     }
@@ -106,10 +106,10 @@ export default defineComponent({
     }
 
     const clearGrids = () => {
-      isClear.value = !isClear.value
       clearTimer()
       setTimer()
       startTimer()
+      isClear.value = !isClear.value
     }
 
     const onGrids = (g: unknown) => {
