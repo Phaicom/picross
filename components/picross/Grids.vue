@@ -57,6 +57,11 @@ export default defineComponent({
         return
       }
 
+      if (props.selector === 'select' && grids.value[col][row] === 3) {
+        grids.value[col][row] = 1
+        return
+      }
+
       if (grids.value[col][row]) {
         grids.value[col][row] = 0
       } else if (props.selector === 'cross') {
@@ -141,6 +146,7 @@ export default defineComponent({
       height: 40px;
       position: relative;
       transition: all 0.2s ease;
+      user-select: none;
 
       &:not(:last-child) {
         border-right: 1px solid var(--primary-color);

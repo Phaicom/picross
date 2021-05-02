@@ -63,9 +63,13 @@ export default defineComponent({
     align-items: center;
     width: 40px;
 
-    .hint.completed {
-      text-decoration: line-through;
-      color: var(--tertiary-color);
+    .hint {
+      user-select: none;
+
+      &.completed {
+        text-decoration: line-through;
+        color: var(--tertiary-color);
+      }
     }
   }
 
