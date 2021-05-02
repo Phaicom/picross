@@ -2,12 +2,14 @@
 .base-container
   .score-time(:class='{ "huge-board": width > 5 }')
     .score-time-wrapper
-      h3 Timer
-        span.timer {{ timer }}
-      h3 Records
-      .records
-        div(v-for='(record, i) in records', v-if='records.length') {{ i + 1 + ": " + record }}
-        div(v-if='!records.length') -
+      CommonButton.toggle-timer(@click.native='toggleTimer()') {{ isTimerToggle ? "On" : "Off" }}
+      div(v-show='isTimerToggle')
+        h3 Timer
+          span.timer {{ timer }}
+        h3 Records
+        .records
+          div(v-for='(record, i) in records', v-if='records.length') {{ i + 1 + ": " + record }}
+          div(v-if='!records.length') -
   .selector-group
     CommonButton(
       @click.native='changeSelector("select")',
@@ -70,6 +72,7 @@ export default defineComponent({
     const selector = ref('select')
     const isClear = ref(false)
     const isWin = ref(false)
+    const isTimerToggle = ref(true)
     const grids = ref<number[][]>([[]])
     const date = ref<DateTime>(DateTime.fromISO('2016-05-25'))
     const records = ref<string[]>([])
@@ -140,6 +143,10 @@ export default defineComponent({
       return getHint(isLeft, grids.value)
     }
 
+    const toggleTimer = () => {
+      isTimerToggle.value = !isTimerToggle.value
+    }
+
     onMounted(() => {
       setupGrids()
     })
@@ -167,6 +174,8 @@ export default defineComponent({
       setTimer,
       startTimer,
       addRecord,
+      toggleTimer,
+      isTimerToggle,
     }
   },
   watch: {
@@ -196,7 +205,7 @@ export default defineComponent({
     flex-direction: column;
     height: 100%;
     left: -33%;
-    padding-top: 23%;
+    padding-top: 13%;
     font-size: 12px;
 
     &.huge-board {
@@ -211,9 +220,15 @@ export default defineComponent({
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
       padding: 20px 10px;
       overflow: hidden;
+      width: 100px;
 
       & > *:not(:first-child) {
         padding-top: 5px;
+      }
+
+      .toggle-timer {
+        background-color: var(--bg-color);
+        backdrop-filter: unset;
       }
 
       .timer {
