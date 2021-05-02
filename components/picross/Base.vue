@@ -1,5 +1,13 @@
 <template lang="pug">
 .base-container
+  .score-time(:class='{ "huge-board": width > 5 }')
+    .score-time-wrapper
+      h3 Timer
+        span.timer {{ timer }}
+      h3 Records
+      .records
+        div(v-for='(record, i) in records', v-if='records.length') {{ i + 1 + ": " + record }}
+        div(v-if='!records.length') -
   .selector-group
     CommonButton(
       @click.native='changeSelector("select")',
@@ -44,8 +52,10 @@ import {
   ref,
   onMounted,
   watchEffect,
+  computed,
 } from '@nuxtjs/composition-api'
 import { generateHint, reverseRowToColumn } from '@/utils/picross'
+import { DateTime } from 'luxon'
 
 export default defineComponent({
   props: {
@@ -61,6 +71,32 @@ export default defineComponent({
     const isClear = ref(false)
     const isWin = ref(false)
     const grids = ref<number[][]>([[]])
+    const date = ref<DateTime>(DateTime.fromISO('2016-05-25'))
+    const records = ref<string[]>([])
+    // eslint-disable-next-line no-undef
+    const interval = ref()
+
+    const timer = computed(() => {
+      return date.value.toFormat('mm:ss')
+    })
+
+    const setTimer = () => {
+      date.value = DateTime.fromISO('2016-05-25')
+    }
+
+    const startTimer = async () => {
+      interval.value = await setInterval(function () {
+        date.value = date.value.plus({ seconds: 1 })
+      }, 1000)
+    }
+
+    const clearTimer = () => {
+      clearInterval(interval.value)
+    }
+
+    const addRecord = () => {
+      records.value.push(timer.value)
+    }
 
     const changeSelector = (s: string) => {
       selector.value = s
@@ -68,6 +104,9 @@ export default defineComponent({
 
     const clearGrids = () => {
       isClear.value = !isClear.value
+      clearTimer()
+      setTimer()
+      startTimer()
     }
 
     const onGrids = (g: unknown) => {
@@ -122,11 +161,23 @@ export default defineComponent({
       getHint,
       getHintGrids,
       isWin,
+      timer,
+      clearTimer,
+      records,
+      setTimer,
+      startTimer,
+      addRecord,
     }
   },
   watch: {
     answer() {
       this.setupGrids()
+    },
+    isWin(isWin) {
+      if (isWin) {
+        this.addRecord()
+        this.clearTimer()
+      }
     },
   },
 })
@@ -134,9 +185,52 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .base-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .score-time {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    left: -33%;
+    padding-top: 23%;
+    font-size: 12px;
+
+    &.huge-board {
+      left: -25%;
+    }
+
+    .score-time-wrapper {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(4px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+      padding: 20px 10px;
+      overflow: hidden;
+
+      & > *:not(:first-child) {
+        padding-top: 5px;
+      }
+
+      .timer {
+        margin-left: 5px;
+        color: var(--secondary-color);
+      }
+
+      .records {
+        display: flex;
+        flex-direction: column-reverse;
+
+        & > div:not(:last-child) {
+          padding-top: 1px;
+        }
+      }
+    }
+  }
 
   .selector-group {
     margin-bottom: 20px;
