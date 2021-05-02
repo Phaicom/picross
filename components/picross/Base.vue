@@ -84,6 +84,7 @@ export default defineComponent({
     }
 
     const setupGrids = () => {
+      clearGrids()
       width.value = props.answer.length
       height.value = props.answer[0].length
     }

@@ -58,6 +58,7 @@ export default defineComponent({
   align-items: center;
   text-align: center;
   flex-direction: column;
+  padding-bottom: 50px;
 
   .base-header {
     margin: 50px 0 20px 0;
