@@ -57,11 +57,6 @@ export default defineComponent({
         return
       }
 
-      if (props.selector === 'select' && grids.value[col][row] === 3) {
-        grids.value[col][row] = 1
-        return
-      }
-
       if (grids.value[col][row]) {
         grids.value[col][row] = 0
       } else if (props.selector === 'cross') {

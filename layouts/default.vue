@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   .layout-container(:style='style')
-    Navbar
+    //- Navbar
     .white-gradient
     main
       Nuxt
