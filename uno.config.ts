@@ -9,11 +9,13 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: {},
+  shortcuts: {
+    'bg-base': 'bg-white dark:bg-[#020420]',
+  },
   theme: {
     colors: {
       primary: {
-        DEFAULT: '#00c16a',
+        DEFAULT: '#61AFEF',
       },
     },
   },

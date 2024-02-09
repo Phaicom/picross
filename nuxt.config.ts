@@ -2,10 +2,14 @@
 export default defineNuxtConfig({
   modules: [
     '@unocss/nuxt',
+    '@nuxtjs/color-mode',
   ],
+  colorMode: {
+    classSuffix: '',
+  },
   app: {
     head: {
-      titleTemplate: '%s - Picross',
+      titleTemplate: 'Picross',
       htmlAttrs: {
         lang: 'en-US',
       },
