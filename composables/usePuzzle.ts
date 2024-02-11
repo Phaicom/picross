@@ -1,5 +1,6 @@
 import { reactive, ref } from 'vue'
-import type { CellTypes, Hint, Hints } from '../types'
+import { CellTypes } from '../types'
+import type { Hint, Hints } from '../types'
 
 export function usePuzzle() {
   const width = ref(0)
@@ -52,9 +53,5 @@ export function usePuzzle() {
     return result
   }
 
-  function setCell(row: number, col: number, type: CellTypes) {
-    grid[row][col] = type
-  }
-
-  return { width, height, totalCells, grid, solution, hints, setup, generate, setCell }
+  return { width, height, totalCells, grid, solution, hints, setup, generate }
 }
