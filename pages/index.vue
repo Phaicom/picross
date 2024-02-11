@@ -1,9 +1,8 @@
 <template>
-  <main h-100dvh h-screen w-screen of-hidden flex="~ items-center justify-center">
+  <main h-100dvh h-screen w-screen of-hidden grid="~ rows-[max-content_1fr]">
     <div>
       <TheNav />
-      <div>asd</div>
-      <div>zxc</div>
+      <Puzzle />
     </div>
   </main>
 </template>
