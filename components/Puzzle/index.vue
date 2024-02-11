@@ -3,12 +3,12 @@
 </script>
 
 <template>
-  <div px4 py3 grid="~ cols-4 gap-4">
+  <div px4 py3>
     <div grid="col-span-3" bg-gray:10>
-      1
+      <PuzzleBoard />
     </div>
-    <div bg-gray:10>
-      2
-    </div>
+    <!-- <div bg-gray:10>
+      Puzzle Configs
+    </div> -->
   </div>
 </template>
