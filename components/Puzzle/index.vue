@@ -4,7 +4,7 @@
 
 <template>
   <div px4 py3>
-    <div grid="col-span-3" bg-gray:10>
+    <div grid="col-span-3">
       <PuzzleBoard />
     </div>
     <!-- <div bg-gray:10>

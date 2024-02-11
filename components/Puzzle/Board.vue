@@ -12,7 +12,7 @@ onMounted(() => {
   <table mx-auto my-0 w-auto table-fixed>
     <thead>
       <tr>
-        <th>asd</th>
+        <PuzzlePreview :grid="grid" />
         <PuzzleHint v-for="(_, index) in hints.col" :key="index" v-model:hints="hints.col[index]" :is-row="false" />
       </tr>
     </thead>
