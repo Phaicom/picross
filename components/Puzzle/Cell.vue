@@ -5,7 +5,7 @@ const cell = defineModel<CellTypes>('cell', { default: 0 })
 const cellClass = computed(() => {
   switch (cell.value) {
     case CellTypes.Fill:
-      return 'bg-black dark:bg-gray'
+      return 'bg-cell'
     case CellTypes.Cross:
       return 'i-ph:x-light'
     case CellTypes.Circle:
