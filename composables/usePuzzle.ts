@@ -1,6 +1,5 @@
 import { reactive, ref } from 'vue'
-import { CellTypes } from '../types'
-import type { Hint, Hints } from '../types'
+import type { Hint, Hints, Settings } from '../types'
 
 export function usePuzzle() {
   const width = ref(0)
@@ -9,28 +8,32 @@ export function usePuzzle() {
   const grid = reactive<number[][]>([])
   const solution = reactive<number[][]>([])
   const hints = reactive<Hints>({ row: [], col: [] })
+  const settings = reactive<Settings>({ width: 5, height: 5, boardSize: 12 })
 
-  function setup(w: number, h: number) {
-    if (Number.isNaN(+w) && Number.isNaN(+h))
+  function setup() {
+    if (Number.isNaN(+settings.width) && Number.isNaN(+h))
       throw new Error('width and height are required!')
-    if (w <= 0 || h <= 0)
+    if (settings.width <= 0 || settings.height <= 0)
       throw new Error('width or height are less than or equal to 0!')
 
-    width.value = w
-    height.value = h
+    width.value = settings.width
+    height.value = settings.height
     totalCells.value = width.value * height.value
 
     reset()
+    generateSolution()
   }
 
   function reset() {
-    Object.assign(grid, Array.from({ length: width.value }).fill(0).map(() => Array.from({ length: height.value }).fill(0),
-    ) as number[][])
-    Object.assign(solution, grid)
-    Object.assign(hints, { row: [], col: [] })
+    grid.splice(0, grid.length)
+    const arr = Array.from({ length: width.value }).fill(0).map(() => Array.from({ length: height.value }).fill(0),
+    ) as number[][]
+    Object.assign(grid, arr)
   }
 
-  function generate() {
+  function generateSolution() {
+    solution.splice(0, solution.length)
+    Object.assign(solution, grid)
     Object.assign(solution, solution.map(row => row.map(() => Math.floor(Math.random() * 2))))
     _getHints()
   }
@@ -53,5 +56,5 @@ export function usePuzzle() {
     return result
   }
 
-  return { width, height, totalCells, grid, solution, hints, setup, generate }
+  return { width, height, totalCells, grid, solution, hints, settings, setup, generateSolution, reset }
 }

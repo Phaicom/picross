@@ -9,6 +9,7 @@ import {
 } from 'unocss'
 
 export default defineConfig({
+  safelist: 'w-6 w-12 w-18 h-6 h-12 h-18'.split(' '),
   shortcuts: {
     'border-base': 'border-gray-200 dark:border-gray-800',
     'bg-base': 'bg-white dark:bg-[#020420]',

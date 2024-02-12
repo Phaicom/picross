@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { Settings } from '~/types'
 import { CellTypes } from '~/types'
 
 const cell = defineModel<CellTypes>('cell', { default: 0 })
@@ -15,6 +16,8 @@ const cellClass = computed(() => {
       return ''
   }
 })
+const settings = inject<Settings>('settings', { width: 5, height: 5, boardSize: 12 })
+const boardSizeClass = computed(() => `h-${settings.boardSize} w-${settings.boardSize}`)
 
 function setCell(cellType: CellTypes) {
   cell.value = cell.value > 0 ? CellTypes.Empty : cellType
@@ -22,7 +25,7 @@ function setCell(cellType: CellTypes) {
 </script>
 
 <template>
-  <td border="2 solid" h-50px w-50px rounded-lg text-center @click="setCell(CellTypes.Fill)">
+  <td border="2 solid" rounded-lg text-center :class="boardSizeClass" @click="setCell(CellTypes.Fill)">
     <div class="h-full w-full" :class="cellClass" />
   </td>
 </template>

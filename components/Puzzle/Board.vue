@@ -1,11 +1,8 @@
 <script lang="ts" setup>
-const puzzle = usePuzzle()
-puzzle.setup(5, 5)
-const { grid, hints } = puzzle
+import type { Hints } from '~/types'
 
-onMounted(() => {
-  puzzle.generate()
-})
+const grid = defineModel<number[][]>('grid', { default: [] })
+const hints = defineModel<Hints>('hints', { default: { row: [], col: [] } })
 </script>
 
 <template>
