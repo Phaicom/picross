@@ -18,7 +18,7 @@ export default defineConfig({
       'bg-faded': 'bg-gray:5',
       'bg-cell': 'bg-[#070F2B] dark:bg-gray',
       'border-cell': 'border-gray-200 dark:border-secondary',
-      'select-base': 'bg-gray:10 p-2',
+      'select-base': 'bg-gray:10 p-2 rounded',
     },
     [/^border-cell-(.*)$/, ([, c]) => `border-${c}-secondary dark:border-${c}-tertiary`],
     [/^btn-(.*)$/, ([, c]) => `bg-${c} text-white py-2 px-4 rounded-lg hover:opacity-90 transition-all`],

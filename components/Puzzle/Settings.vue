@@ -11,7 +11,6 @@ const settings = defineModel('settings', { default: { width: 5, height: 5, board
     :class="{ 'w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4': show }"
   >
     <div :class="show ? 'rotate-45' : 'rotate-0'" i-ph-plus cursor-pointer flex-self-end text-3xl transition-all @click="show = !show" />
-    <!-- TODO: change size base on show variable inside v-show div -->
     <div v-show="show" p="x-1 y-2">
       <h1 primary text-2xl font-bold>
         Configs
