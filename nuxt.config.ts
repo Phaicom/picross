@@ -22,26 +22,10 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
   devtools: { enabled: true },
-  nitro: {
-    routeRules: {
-      '/**': {
-        headers: {
-          'Cross-Origin-Embedder-Policy': 'require-corp',
-          'Cross-Origin-Opener-Policy': 'same-origin',
-        },
-      },
-    },
-  },
   vite: {
     build: {
       minify: 'esbuild',
       cssMinify: 'esbuild',
-    },
-    server: {
-      headers: {
-        'Cross-Origin-Embedder-Policy': 'require-corp',
-        'Cross-Origin-Opener-Policy': 'same-origin',
-      },
     },
     optimizeDeps: {
       include: [
