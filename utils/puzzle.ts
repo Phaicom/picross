@@ -10,3 +10,6 @@ export function reverseRowToColumn(array2d: any[][]) {
   }
   return reverseArr2d
 }
+
+export const PUZZLE_DIMENSION = [5, 6, 7, 8, 9, 10]
+export const BOARD_SIZE = ['small', 'medium', 'large']
