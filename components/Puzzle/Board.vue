@@ -16,7 +16,7 @@ const hints = defineModel<Hints>('hints', { default: { row: [], col: [] } })
     <tbody>
       <tr v-for="(row, rowIndex) in grid" :key="rowIndex">
         <PuzzleHint v-model:hints="hints.row[rowIndex]" :is-row="true" />
-        <PuzzleCell v-for="(_, cellIndex) in row" :key="cellIndex" v-model:cell="row[cellIndex]" />
+        <PuzzleCell v-for="(_, cellIndex) in row" :key="cellIndex" v-model:cell="row[cellIndex]" :row="rowIndex" :col="cellIndex" />
       </tr>
     </tbody>
   </table>
