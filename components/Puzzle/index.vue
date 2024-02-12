@@ -6,8 +6,8 @@ onMounted(() => {
 })
 
 provide('settings', readonly(puzzle.settings))
-provide('width', puzzle.width)
-provide('height', puzzle.height)
+provide('width', readonly(puzzle.width))
+provide('height', readonly(puzzle.height))
 </script>
 
 <template>
