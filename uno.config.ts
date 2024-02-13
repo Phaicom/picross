@@ -9,15 +9,15 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  safelist: 'w-6 w-12 w-18 h-6 h-12 h-18'.split(' '),
+  safelist: 'w-6 w-12 w-18 h-6 h-12 h-18 text-red text-blue'.split(' '),
   shortcuts: [
     {
       'border-base': 'border-gray-200 dark:border-gray-800',
+      'border-cell': 'border-gray-200 dark:border-secondary',
       'bg-base': 'bg-white dark:bg-[#070F2B]',
       'bg-active': 'bg-gray:10',
       'bg-faded': 'bg-gray:5',
       'bg-cell': 'bg-[#070F2B] dark:bg-gray',
-      'border-cell': 'border-gray-200 dark:border-secondary',
       'select-base': 'bg-gray:10 p-2 rounded',
     },
     [/^border-cell-(.*)$/, ([, c]) => `border-${c}-secondary dark:border-${c}-tertiary`],

@@ -6,7 +6,7 @@ const hints = defineModel<Hints>('hints', { default: { row: [], col: [] } })
 </script>
 
 <template>
-  <table mx-auto my-0 w-auto table-fixed>
+  <table w-auto table-fixed>
     <thead>
       <tr>
         <PuzzlePreview :grid="grid" />

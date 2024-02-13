@@ -1,5 +1,5 @@
 import { reactive, ref } from 'vue'
-import type { Hint, Hints, Settings } from '../types'
+import { CellTypes, type Hint, type Hints, type Pointer, type Settings } from '../types'
 
 export function usePuzzle() {
   const width = ref(0)
@@ -9,6 +9,17 @@ export function usePuzzle() {
   const solution = reactive<number[][]>([])
   const hints = reactive<Hints>({ row: [], col: [] })
   const settings = reactive<Settings>({ width: 5, height: 5, boardSize: 12 })
+  const pointer = reactive<Pointer>({ x: 0, y: 0, cellType: CellTypes.Fill })
+
+  const cellSizeClass = computed(() => `h-${settings.boardSize} w-${settings.boardSize}`)
+  const previewSizeStyle = computed(() => {
+    const sizePerOneCell = settings.boardSize > 12 ? settings.boardSize / 5 : 12 / 5
+
+    return {
+      width: `${sizePerOneCell * height.value * 0.25}rem`,
+      height: `${sizePerOneCell * width.value * 0.25}rem`,
+    }
+  })
 
   function setup() {
     if (Number.isNaN(+settings.width) && Number.isNaN(+h))
@@ -56,5 +67,5 @@ export function usePuzzle() {
     return result
   }
 
-  return { width, height, totalCells, grid, solution, hints, settings, setup, generateSolution, reset }
+  return { width, height, totalCells, grid, solution, hints, settings, pointer, cellSizeClass, previewSizeStyle, setup, generateSolution, reset }
 }

@@ -20,3 +20,9 @@ export interface Settings {
   height: number
   boardSize: number
 }
+
+export interface Pointer {
+  x: number
+  y: number
+  cellType: CellTypes
+}
