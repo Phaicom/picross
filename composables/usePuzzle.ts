@@ -11,6 +11,10 @@ export function usePuzzle() {
   const settings = reactive<Settings>({ width: 5, height: 5, boardSize: 12 })
   const pointer = reactive<Pointer>({ x: 0, y: 0, cellType: CellTypes.Fill })
 
+  const isWin = computed(() => {
+    const trimGrid = grid.map(row => row.map(col => col === 1 ? 1 : 0))
+    return trimGrid.length > 0 && solution.length > 0 && JSON.stringify(trimGrid) === JSON.stringify(solution)
+  })
   const cellSizeClass = computed(() => `h-${settings.boardSize} w-${settings.boardSize}`)
   const previewSizeStyle = computed(() => {
     const sizePerOneCell = settings.boardSize > 12 ? settings.boardSize / 5 : 12 / 5
@@ -67,5 +71,5 @@ export function usePuzzle() {
     return result
   }
 
-  return { width, height, totalCells, grid, solution, hints, settings, pointer, cellSizeClass, previewSizeStyle, setup, generateSolution, reset }
+  return { width, height, totalCells, grid, solution, hints, settings, pointer, isWin, cellSizeClass, previewSizeStyle, setup, generateSolution, reset }
 }

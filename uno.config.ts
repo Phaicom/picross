@@ -18,6 +18,8 @@ export default defineConfig({
       'bg-active': 'bg-gray:10',
       'bg-faded': 'bg-gray:5',
       'bg-cell': 'bg-[#070F2B] dark:bg-gray',
+      'bg-hint': 'bg-gray:10 dark:bg-gray:20',
+      'bg-hint-focus': 'bg-tertiary:40 dark:bg-tertiary:60',
       'select-base': 'bg-gray:10 p-2 rounded',
     },
     [/^border-cell-(.*)$/, ([, c]) => `border-${c}-secondary dark:border-${c}-tertiary`],
