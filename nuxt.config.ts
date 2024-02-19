@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: [
     '@unocss/nuxt',
     '@nuxtjs/color-mode',
+    '@pinia/nuxt',
   ],
   colorMode: {
     classSuffix: '',
