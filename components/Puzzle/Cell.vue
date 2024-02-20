@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { Pointer } from '~/types'
-import { CellTypes } from '~/types'
+import { CellTypes } from '~/types/puzzle'
 
 const prop = defineProps({
   row: {
@@ -13,8 +12,12 @@ const prop = defineProps({
   },
 })
 
-const pointer = inject<Pointer>('pointer', { x: 0, y: 0, cellType: CellTypes.Fill })
+const puzzle = usePuzzleStore()
+const pointer = usePointerStore()
+const settings = useSettingsStore()
+
 const cell = defineModel<CellTypes>('cell', { default: 0 })
+
 const cellTypeClass = computed(() => {
   switch (cell.value) {
     case CellTypes.Fill:
@@ -28,27 +31,26 @@ const cellTypeClass = computed(() => {
       return ''
   }
 })
-const cellSizeClass = inject<string>('cellSizeClass', '')
+
+const cellSizeClass = computed(() => `h-${settings.boardSize} w-${settings.boardSize}`)
+
+const borderClass = computed(() => {
+  return {
+    'border-cell-r': (prop.col + 1) % 5 === 0 && prop.col + 1 !== puzzle.height,
+    'border-cell-b': (prop.row + 1) % 5 === 0 && prop.row + 1 !== puzzle.width,
+  }
+})
+
+const isMouseEnter = computed(() => (pointer.row === prop.col) && (pointer.col === prop.row))
 
 function setCell() {
   cell.value = cell.value > 0 ? CellTypes.Empty : pointer.cellType
 }
 
-const width = inject<Ref<number>>('width', ref(5))
-const height = inject<Ref<number>>('height', ref(5))
-const borderClass = computed(() => {
-  return {
-    'border-cell-r': (prop.col + 1) % 5 === 0 && prop.col + 1 !== height.value,
-    'border-cell-b': (prop.row + 1) % 5 === 0 && prop.row + 1 !== width.value,
-  }
-})
-
 function onMouseEnter() {
-  pointer.x = prop.col
-  pointer.y = prop.row
+  pointer.row = prop.col
+  pointer.col = prop.row
 }
-
-const isMouseEnter = computed(() => (pointer.x === prop.col) && (pointer.y === prop.row))
 </script>
 
 <template>

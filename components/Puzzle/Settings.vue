@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 const emit = defineEmits(['reset', 'generate'])
-const show = ref(true)
 
-const settings = defineModel('settings', { default: { width: 5, height: 5, boardSize: 'small' } })
+const settings = useSettingsStore()
+const isShow = ref(true)
 </script>
 
 <template>
   <div
     flex="~ col" bg="gray-100 dark:secondary" p="x-2 y-2" fixed right-6 top-25 select-none rounded
-    :class="{ 'w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4': show }"
+    :class="{ 'w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4': isShow }"
   >
-    <div :class="show ? 'rotate-45' : 'rotate-0'" i-ph-plus cursor-pointer flex-self-end text-3xl transition-all @click="show = !show" />
-    <div v-show="show" p="x-1 y-2">
+    <div :class="isShow ? 'rotate-45' : 'rotate-0'" i-ph-plus cursor-pointer flex-self-end text-3xl transition-all @click="isShow = !isShow" />
+    <div v-show="isShow" p="x-1 y-2">
       <h1 primary text-2xl font-bold>
         Configs
       </h1>
@@ -22,19 +22,19 @@ const settings = defineModel('settings', { default: { width: 5, height: 5, board
           </h2>
           <div flex="~ row gap-4">
             <select
-              v-model="settings.height" select-base
+              v-model="settings.width" select-base
             >
               <option v-for="(d, index) in PUZZLE_DIMENSION" :key="index" :value="d">
                 {{ d }}
               </option>
             </select>
             <span flex="~ items-center justify-center">X</span>
-            <select v-model="settings.width" select-base>
+            <select v-model="settings.height" select-base>
               <option v-for="(d, index) in PUZZLE_DIMENSION" :key="index" :value="d">
                 {{ d }}
               </option>
             </select>
-            <button btn-secondary dark:btn-primary ml-auto @click="emit('generate')">
+            <button ml-auto btn-secondary dark:btn-primary @click="emit('generate')">
               Generate
             </button>
           </div>
@@ -52,7 +52,7 @@ const settings = defineModel('settings', { default: { width: 5, height: 5, board
           </div>
         </div>
         <div>
-          <button btn-secondary dark:btn-primary ml-auto @click="emit('reset')">
+          <button ml-auto btn-secondary dark:btn-primary @click="emit('reset')">
             Reset
           </button>
         </div>

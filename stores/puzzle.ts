@@ -8,6 +8,11 @@ export const usePuzzleStore = defineStore('puzzle', () => {
   const totalCells = ref(0)
   const grid = reactive<number[][]>([])
 
+  const isWin = computed(() => {
+    const trimGrid = grid.map(row => row.map(col => col === 1 ? 1 : 0))
+    return trimGrid.length > 0 && solution.grid.length > 0 && JSON.stringify(trimGrid) === JSON.stringify(solution)
+  })
+
   function generate() {
     if (Number.isNaN(+settings.width) && Number.isNaN(+h))
       throw new Error('width and height are required!')
@@ -30,7 +35,7 @@ export const usePuzzleStore = defineStore('puzzle', () => {
     Object.assign(grid, arr)
   }
 
-  return { width, height, totalCells, grid, generate, reset }
+  return { width, height, totalCells, grid, isWin, generate, reset }
 })
 
 if (import.meta.hot)

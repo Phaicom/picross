@@ -1,4 +1,4 @@
-import { CellTypes } from '~/types'
+import { CellTypes } from '~/types/puzzle'
 
 export const PUZZLE_DIMENSION = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 

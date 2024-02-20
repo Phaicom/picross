@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import type { Pointer } from '~/types'
-import { CellTypes } from '~/types'
-
-const pointer = defineModel<Pointer>('pointer', { default: { x: 0, y: 0, cellType: CellTypes.Fill } })
+const pointer = usePointerStore()
 </script>
 
 <template>

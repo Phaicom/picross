@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Hint } from '~/types'
+import type { Hint } from '~/types/puzzle'
 
 defineProps({
   isRow: Boolean,
