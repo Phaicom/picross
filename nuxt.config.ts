@@ -1,10 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    '@unocss/nuxt',
-    '@nuxtjs/color-mode',
-    '@pinia/nuxt',
-  ],
+  modules: ['@unocss/nuxt', '@nuxtjs/color-mode', '@pinia/nuxt', 'nuxt-vitest'],
   colorMode: {
     classSuffix: '',
   },
