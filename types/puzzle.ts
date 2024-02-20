@@ -11,11 +11,10 @@ export interface Hints {
 }
 
 export interface Hint {
-  value: number
-  isCompleted: boolean
+  value?: number
+  isCompleted?: boolean
 }
 
-// migrate
 export interface Settings {
   width: number
   height: number
