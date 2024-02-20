@@ -10,7 +10,8 @@ export const usePuzzleStore = defineStore('puzzle', () => {
 
   const isWin = computed(() => {
     const trimGrid = grid.map(row => row.map(col => col === 1 ? 1 : 0))
-    return trimGrid.length > 0 && solution.grid.length > 0 && JSON.stringify(trimGrid) === JSON.stringify(solution)
+
+    return trimGrid.length > 0 && solution.grid.length > 0 && JSON.stringify(trimGrid) === JSON.stringify(solution.grid)
   })
 
   function generate() {
@@ -30,7 +31,7 @@ export const usePuzzleStore = defineStore('puzzle', () => {
 
   function reset() {
     grid.splice(0, grid.length)
-    const arr = Array.from({ length: width.value }).fill(0).map(() => Array.from({ length: height.value }).fill(0),
+    const arr = Array.from({ length: height.value }).fill(0).map(() => Array.from({ length: width.value }).fill(0),
     ) as number[][]
     Object.assign(grid, arr)
   }

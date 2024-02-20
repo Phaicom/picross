@@ -36,8 +36,8 @@ const cellSizeClass = computed(() => `h-${settings.boardSize} w-${settings.board
 
 const borderClass = computed(() => {
   return {
-    'border-cell-r': (prop.col + 1) % 5 === 0 && prop.col + 1 !== puzzle.height,
-    'border-cell-b': (prop.row + 1) % 5 === 0 && prop.row + 1 !== puzzle.width,
+    'border-cell-r': (prop.col + 1) % 5 === 0 && prop.col + 1 !== puzzle.width,
+    'border-cell-b': (prop.row + 1) % 5 === 0 && prop.row + 1 !== puzzle.height,
   }
 })
 

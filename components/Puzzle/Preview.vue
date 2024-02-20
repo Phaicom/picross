@@ -6,8 +6,8 @@ const previewSizeStyle = computed(() => {
   const sizePerOneCell = settings.boardSize > 12 ? settings.boardSize / 5 : 12 / 5
 
   return {
-    width: `${sizePerOneCell * puzzle.height * 0.25}rem`,
-    height: `${sizePerOneCell * puzzle.width * 0.25}rem`,
+    width: `${sizePerOneCell * puzzle.width * 0.25}rem`,
+    height: `${sizePerOneCell * puzzle.height * 0.25}rem`,
   }
 })
 </script>
