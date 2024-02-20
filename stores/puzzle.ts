@@ -1,11 +1,11 @@
 import { useSolutionStore } from './solution'
 import { useHintsStore } from './hints'
-import type { Hints, Pointer, Settings } from '~/types/puzzle'
+import type { Pointer, Settings } from '~/types/puzzle'
 import { CellTypes } from '~/types/puzzle'
 
 export const usePuzzleStore = defineStore('puzzleStore', () => {
-  const solutionStore = useSolutionStore()
-  const hintsStore = useHintsStore()
+  const solution = useSolutionStore()
+  const hints = useHintsStore()
 
   const width = ref(0)
   const height = ref(0)
@@ -13,10 +13,6 @@ export const usePuzzleStore = defineStore('puzzleStore', () => {
   const grid = reactive<number[][]>([])
   const settings = reactive<Settings>({ width: 5, height: 5, boardSize: 12 })
   const pointer = reactive<Pointer>({ x: 0, y: 0, cellType: CellTypes.Fill })
-
-  const hints = computed(() => {
-    return { row: hintsStore.row, col: hintsStore.col } as Hints
-  })
 
   function generate() {
     if (Number.isNaN(+settings.width) && Number.isNaN(+h))
@@ -29,8 +25,8 @@ export const usePuzzleStore = defineStore('puzzleStore', () => {
     totalCells.value = width.value * height.value
 
     reset()
-    solutionStore.generate(grid)
-    hintsStore.generate(solutionStore.solution)
+    solution.generate(grid)
+    hints.generate(solution.grid)
   }
 
   function reset() {
@@ -40,7 +36,7 @@ export const usePuzzleStore = defineStore('puzzleStore', () => {
     Object.assign(grid, arr)
   }
 
-  return { width, height, totalCells, grid, settings, pointer, hints, generate, reset }
+  return { width, height, totalCells, grid, settings, pointer, generate, reset }
 })
 
 if (import.meta.hot)

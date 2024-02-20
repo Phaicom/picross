@@ -1,13 +1,13 @@
 export const useSolutionStore = defineStore('solutionStore', () => {
-  const solution = reactive<number[][]>([])
+  const grid = reactive<number[][]>([])
 
-  function generate(grid: number[][]) {
-    solution.splice(0, solution.length)
-    Object.assign(solution, grid)
-    Object.assign(solution, solution.map(row => row.map(() => Math.floor(Math.random() * 2))))
+  function generate(puzzleGrid: number[][]) {
+    grid.splice(0, grid.length)
+    Object.assign(grid, puzzleGrid)
+    Object.assign(grid, grid.map(row => row.map(() => Math.floor(Math.random() * 2))))
   }
 
-  return { solution, generate }
+  return { grid, generate }
 })
 
 if (import.meta.hot)

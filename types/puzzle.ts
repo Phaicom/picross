@@ -5,11 +5,6 @@ export enum CellTypes {
   Circle,
 }
 
-export interface Hints {
-  row: Hint[][]
-  col: Hint[][]
-}
-
 export interface Hint {
   value?: number
   isCompleted?: boolean
