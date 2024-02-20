@@ -1,4 +1,4 @@
-export const useSolutionStore = defineStore('solutionStore', () => {
+export const useSolutionStore = defineStore('solution', () => {
   const grid = reactive<number[][]>([])
 
   function generate(puzzleGrid: number[][]) {

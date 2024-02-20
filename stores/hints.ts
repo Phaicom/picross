@@ -1,6 +1,6 @@
 import type { Hint } from '~/types/puzzle'
 
-export const useHintsStore = defineStore('hintsStore', () => {
+export const useHintsStore = defineStore('hints', () => {
   const row = reactive<Hint[][]>([])
   const col = reactive<Hint[][]>([])
 
