@@ -4,7 +4,6 @@
       Picross
     </NuxtLink>
     <div flex="~ gap-1 items-center" ml-auto>
-      <ColorToggle />
       <NuxtLink rounded p2 title="Github" hover="bg-active" href="https://github.com/Phaicom/picross" target="_blank">
         <div i-ph-github-logo-duotone text-3xl />
       </NuxtLink>

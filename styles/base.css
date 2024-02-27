@@ -4,10 +4,6 @@ body {
   --uno: bg-base font-sans;
 }
 
-.dark {
-  color-scheme: dark;
-}
-
 * {
   min-width: 0;
 }
