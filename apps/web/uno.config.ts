@@ -3,7 +3,7 @@ import {
   transformerDirectives,
 } from 'unocss'
 
-import preset from './apps/web/uno.preset'
+import preset from './uno.preset'
 
 export default defineConfig({
   presets: [preset],
