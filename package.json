@@ -9,6 +9,7 @@
     "generate": "turbo run generate",
     "preview": "turbo run preview",
     "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
     "lint": "eslint .",
     "format": "eslint . --fix"
   },
