@@ -19,6 +19,7 @@
       "persistent": true
     },
     "preview": {},
-    "test": {}
+    "test": {},
+    "typecheck": {}
   }
 }
