@@ -2,6 +2,7 @@ import type { Puzzle } from '@picross/shared'
 
 // for test only
 import { readFileSync } from '../../parser/src/utils'
+import { SimpleSolver } from './solver'
 
 export class Game {
   puzzle: Puzzle
@@ -43,25 +44,20 @@ export class Game {
       },
     }
 
-    if (this.grid.length)
-      this.grid = []
-    if (this.solution.length)
-      this.grid = []
-
-    this.grid.splice(0, this.grid.length)
-    this.solution.splice(0, this.solution.length)
+    this.grid = []
+    this.solution = []
   }
 
   setPuzzle(puzzle: Puzzle) {
     // set puzzle
     this.puzzle = puzzle
     // generate grid base on width and height
-    const grid = Array.from({ length: this.puzzle.height }).fill(0).map(() => Array.from({ length: this.puzzle.width }).fill(0),
-    ) as number[][]
-    Object.assign(this.grid, grid)
+    this.grid = Array.from({ length: this.puzzle.height }, () => Array.from({ length: this.puzzle.width }, () => 0))
 
     // generate solution base on puzzle clues
     // solver function goes here
+    const solver = new SimpleSolver(1)
+    console.log(solver)
   }
 }
 
@@ -70,4 +66,4 @@ const output = readFileSync('../../parser/output/webpbn000001.json')
 const game = new Game()
 game.setPuzzle(JSON.parse(output as string))
 
-console.log(game)
+// console.log(game)
