@@ -3,43 +3,46 @@ import { BaseParser } from './base'
 
 export class NonParser extends BaseParser {
   parse(input: string): Puzzle {
-    const inputArr = input.split('\n\n')
-
-    if (inputArr.length < 3)
+    const sections = input.split('\n\n')
+    if (sections.length < 3)
       throw new Error('Incorrect non file structure')
 
-    // parse data section
-    const data = inputArr[0]
-    for (const line of data.split('\n')) {
-      const [key, value, _] = line.indexOf('"') > 0 ? line.split('"') : line.split(' ')
-      const kt = key.trim()
-      const vt = value.trim()
+    this.parseDataSection(sections[0])
+    this.parseCluesSection(sections.slice(1, 3))
 
-      if (kt in this.puzzle)
-        (this.puzzle as any)[kt] = vt
-      else if (kt === 'by')
-        this.puzzle.author = vt
+    return this.puzzle
+  }
+
+  private parseDataSection(data: string): void {
+    for (const line of data.split('\n')) {
+      const [key, value] = line.indexOf('"') > 0 ? line.split('"') : line.split(' ')
+      const trimmedKey = key.trim()
+      const trimmedValue = value.trim()
+
+      if (trimmedKey in this.puzzle)
+        (this.puzzle as any)[trimmedKey] = trimmedValue
+      else if (trimmedKey === 'by')
+        this.puzzle.author = trimmedValue
       else
         throw new Error('Incorrect non file key')
     }
-    this.puzzle.width = +this.puzzle.width
-    this.puzzle.height = +this.puzzle.height
 
-    // parse row and column section
-    this.puzzle.clues = {
-      rows: [] as number[][],
-      columns: [] as number[][],
-    }
-    for (let i = 1; i < 3; i++) {
-      const arr = inputArr[i].split('\n')
+    this.puzzle.width = Number(this.puzzle.width)
+    this.puzzle.height = Number(this.puzzle.height)
+  }
 
-      if (!['rows', 'columns'].includes(arr.shift() || ''))
+  private parseCluesSection(sections: string[]): void {
+    this.puzzle.clues = { rows: [], columns: [] }
+
+    sections.forEach((section) => {
+      const lines = section.split('\n')
+      const key = lines.shift()
+
+      if (!['rows', 'columns'].includes(key || ''))
         throw new Error('Incorrect non file key')
 
-      for (const line of arr)
-        i === 1 ? this.puzzle.clues.rows.push(line.split(',').map(v => +v)) : this.puzzle.clues.columns.push(line.split(',').map(v => +v))
-    }
-
-    return this.puzzle
+      const clues = lines.map(line => line.split(',').map(Number))
+      this.puzzle.clues[key === 'rows' ? 'rows' : 'columns'] = clues
+    })
   }
 }

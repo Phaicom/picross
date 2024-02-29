@@ -4,18 +4,17 @@ import type { Puzzle } from '@picross/shared'
 import { NonParser } from './parsers'
 import { readFileSync } from './utils'
 
+const nonParser = new NonParser()
+
 export function parser(path: PathOrFileDescriptor): Puzzle {
-  let puzzle = {} as Puzzle
-  const input = readFileSync(path.toString(), 'utf-8')
+  const input = readFileSync(path, 'utf-8')
   const extName = extname(path.toString()).replace('.', '')
 
   switch (extName) {
     case 'non':
-      puzzle = new NonParser().parse(input.toString())
-      break
+      return nonParser.parse(input.toString())
 
     default:
-      throw new Error(`${extName} file is not support`)
+      throw new Error(`${extName} file is not supported`)
   }
-  return puzzle
 }

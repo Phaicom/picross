@@ -29,7 +29,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@picross/shared": "workspace:*"
+    "@picross/shared": "workspace:*",
+    "lru-cache": "^10.2.0"
   },
   "devDependencies": {
     "esno": "^4.0.0",
