@@ -1,4 +1,4 @@
-import type { Parser, Puzzle } from '../../types/types'
+import type { Parser, Puzzle } from '@picross/shared'
 
 export class BaseParser implements Parser {
   puzzle: Puzzle

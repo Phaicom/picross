@@ -28,6 +28,9 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@picross/shared": "workspace:*"
+  },
   "devDependencies": {
     "esno": "^4.0.0",
     "typescript": "^5.3.3",

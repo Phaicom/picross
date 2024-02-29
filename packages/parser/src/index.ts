@@ -1,6 +1,6 @@
 import type { PathOrFileDescriptor } from 'node:fs'
 import { extname } from 'node:path'
-import type { Puzzle } from '../types/types'
+import type { Puzzle } from '@picross/shared'
 import { NonParser } from './parsers'
 import { readFileSync } from './utils'
 

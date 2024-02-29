@@ -1,4 +1,4 @@
-import type { Puzzle } from '../../types/types'
+import type { Puzzle } from '@picross/shared'
 import { BaseParser } from './base'
 
 export class NonParser extends BaseParser {

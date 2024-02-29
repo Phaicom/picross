@@ -1,5 +1,5 @@
 {
-  "name": "@picross/core",
+  "name": "@picross/shared",
   "type": "module",
   "private": true,
   "sideEffects": false,
@@ -24,18 +24,10 @@
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
-    "start": "esno src/index.ts",
-    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "@picross/shared": "workspace:*"
-  },
   "devDependencies": {
-    "esno": "^4.0.0",
     "typescript": "^5.3.3",
-    "unbuild": "^2.0.0",
-    "vite": "^5.1.4",
-    "vitest": "^1.3.1"
+    "unbuild": "^2.0.0"
   }
 }
