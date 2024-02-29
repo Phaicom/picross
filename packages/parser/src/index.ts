@@ -1,14 +1,13 @@
-import fs from 'node:fs'
-import path from 'node:path'
+import type { PathOrFileDescriptor } from 'node:fs'
+import { extname } from 'node:path'
 import type { Puzzle } from '../types/types'
 import { NonParser } from './parsers'
+import { readFileSync } from './utils'
 
-const ROOT_PATH = new URL(`${path.dirname(import.meta.url)}`).pathname
-
-export function parser(filePath: fs.PathOrFileDescriptor): Puzzle {
+export function parser(path: PathOrFileDescriptor): Puzzle {
   let puzzle = {} as Puzzle
-  const input = fs.readFileSync(path.resolve(ROOT_PATH, filePath.toString()))
-  const extName = path.extname(filePath.toString()).replace('.', '')
+  const input = readFileSync(path.toString(), 'utf-8')
+  const extName = extname(path.toString()).replace('.', '')
 
   switch (extName) {
     case 'non':
