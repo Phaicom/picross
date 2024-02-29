@@ -1,5 +1,8 @@
 import type { Parser, Puzzle } from '@picross/shared'
 
+/**
+ * Represents a base parser for parsing picross puzzles.
+ */
 export class BaseParser implements Parser {
   puzzle: Puzzle
 

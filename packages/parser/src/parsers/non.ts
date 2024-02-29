@@ -1,7 +1,17 @@
 import type { Puzzle } from '@picross/shared'
 import { BaseParser } from './base'
 
+/**
+ * Represents a parser for Non files.
+ */
 export class NonParser extends BaseParser {
+  /**
+   * Parses the input string and returns a Puzzle object.
+   * @param input - The input string to parse.
+   * @returns The parsed Puzzle object.
+   * @throws {Error} If the non file structure is incorrect.
+   * @throws {Error} If the non file key is incorrect.
+   */
   parse(input: string): Puzzle {
     const sections = input.split('\n\n')
     if (sections.length < 3)
@@ -13,6 +23,11 @@ export class NonParser extends BaseParser {
     return this.puzzle
   }
 
+  /**
+   * Parses the data section of the non file.
+   * @param data - The data section string to parse.
+   * @throws {Error} If the non file key is incorrect.
+   */
   private parseDataSection(data: string): void {
     for (const line of data.split('\n')) {
       const [key, value] = line.indexOf('"') > 0 ? line.split('"') : line.split(' ')
@@ -31,6 +46,11 @@ export class NonParser extends BaseParser {
     this.puzzle.height = Number(this.puzzle.height)
   }
 
+  /**
+   * Parses the clues section of the non file.
+   * @param sections - The array of clues section strings to parse.
+   * @throws {Error} If the non file key is incorrect.
+   */
   private parseCluesSection(sections: string[]): void {
     this.puzzle.clues = { rows: [], columns: [] }
 
