@@ -2,7 +2,6 @@ import {
   definePreset,
   presetAttributify,
   presetIcons,
-  presetTypography,
   presetUno,
   presetWebFonts,
 } from 'unocss'
@@ -55,6 +54,5 @@ export default definePreset({
         mono: 'DM Mono',
       },
     }),
-    presetTypography(),
   ],
 })
