@@ -14,5 +14,6 @@ export interface Clues {
 }
 
 export interface Parser {
+  puzzle: Puzzle
   parse: (input: string) => Puzzle
 }

@@ -1,19 +1,8 @@
-import type { Parser, Puzzle } from '../../types/types'
+import type { Puzzle } from '../../types/types'
+import { BaseParser } from './base'
 
-export class NonParser implements Parser {
+export class NonParser extends BaseParser {
   parse(input: string): Puzzle {
-    const puzzle = {
-      catalogue: '',
-      title: '',
-      author: '',
-      copyright: '',
-      width: 0,
-      height: 0,
-      clues: {
-        rows: [],
-        columns: [],
-      },
-    } as Puzzle
     const inputArr = input.split('\n\n')
 
     if (inputArr.length < 3)
@@ -26,18 +15,18 @@ export class NonParser implements Parser {
       const kt = key.trim()
       const vt = value.trim()
 
-      if (kt in puzzle)
-        (puzzle as any)[kt] = vt
+      if (kt in this.puzzle)
+        (this.puzzle as any)[kt] = vt
       else if (kt === 'by')
-        puzzle.author = vt
+        this.puzzle.author = vt
       else
         throw new Error('Incorrect non file key')
     }
-    puzzle.width = +puzzle.width
-    puzzle.height = +puzzle.height
+    this.puzzle.width = +this.puzzle.width
+    this.puzzle.height = +this.puzzle.height
 
     // parse row and column section
-    puzzle.clues = {
+    this.puzzle.clues = {
       rows: [] as number[][],
       columns: [] as number[][],
     }
@@ -48,9 +37,9 @@ export class NonParser implements Parser {
         throw new Error('Incorrect non file key')
 
       for (const line of arr)
-        i === 1 ? puzzle.clues.rows.push(line.split(',').map(v => +v)) : puzzle.clues.columns.push(line.split(',').map(v => +v))
+        i === 1 ? this.puzzle.clues.rows.push(line.split(',').map(v => +v)) : this.puzzle.clues.columns.push(line.split(',').map(v => +v))
     }
 
-    return puzzle as Puzzle
+    return this.puzzle
   }
 }
