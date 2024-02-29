@@ -15,14 +15,20 @@ export interface Puzzle {
  * Represents the clues for a puzzle, organized by rows and columns.
  */
 export interface Clues {
-  rows: PuzzleRowOrColumn
-  columns: PuzzleRowOrColumn
+  rows: ClueRowOrColumn
+  cols: ClueRowOrColumn
 }
 
 /**
- * Represents a row or column in a puzzle, defined as a 2D array of numbers.
+ * Represents a clue row or column in a picross puzzle.
+ * It is an array of arrays, where each inner array represents a group of consecutive filled cells.
+ * The numbers in the inner arrays represent the lengths of the filled cell groups.
+ * For example, [[2, 1], [3], [1, 2]] represents a clue row or column with three groups of filled cells:
+ * - The first group has 2 filled cells, followed by 1 filled cell.
+ * - The second group has 3 filled cells.
+ * - The third group has 1 filled cell, followed by 2 filled cells.
  */
-export type PuzzleRowOrColumn = number[][]
+export type ClueRowOrColumn = number[][]
 
 /**
  * Represents a parser for a puzzle, with a method to parse a string input into a Puzzle.

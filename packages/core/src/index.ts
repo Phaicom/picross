@@ -19,7 +19,7 @@ export class Game {
       height: 0,
       clues: {
         rows: [],
-        columns: [],
+        cols: [],
       },
     }
 
@@ -40,7 +40,7 @@ export class Game {
       height: 0,
       clues: {
         rows: [],
-        columns: [],
+        cols: [],
       },
     }
 
@@ -56,7 +56,7 @@ export class Game {
 
     // generate solution base on puzzle clues
     // solver function goes here
-    const solver = new SimpleSolver(1)
+    const solver = new SimpleSolver()
     console.log(solver)
   }
 }

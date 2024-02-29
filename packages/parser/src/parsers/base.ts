@@ -16,7 +16,7 @@ export class BaseParser implements Parser {
       height: 0,
       clues: {
         rows: [],
-        columns: [],
+        cols: [],
       },
     }
   }

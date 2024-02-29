@@ -52,7 +52,7 @@ export class NonParser extends BaseParser {
    * @throws {Error} If the non file key is incorrect.
    */
   private parseCluesSection(sections: string[]): void {
-    this.puzzle.clues = { rows: [], columns: [] }
+    this.puzzle.clues = { rows: [], cols: [] }
 
     sections.forEach((section) => {
       const lines = section.split('\n')
@@ -62,7 +62,7 @@ export class NonParser extends BaseParser {
         throw new Error('Incorrect non file key')
 
       const clues = lines.map(line => line.split(',').map(Number))
-      this.puzzle.clues[key === 'rows' ? 'rows' : 'columns'] = clues
+      this.puzzle.clues[key === 'rows' ? 'rows' : 'cols'] = clues
     })
   }
 }
