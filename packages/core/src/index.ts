@@ -1,6 +1,4 @@
 import type { Puzzle } from '@picross/shared'
-
-// for test only
 import { SimpleSolver } from './solver'
 
 export class Game {
