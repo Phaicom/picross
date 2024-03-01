@@ -27,37 +27,38 @@ export function last<T>(arr: T[]) {
 }
 
 /**
- * Generates combinations of numbers from 0 to `a-1` of length `b`.
+ * Generates combinations of numbers from 0 to `a-1` of length `len`.
  *
- * @param a - The upper bound (exclusive) for the numbers to generate combinations from.
- * @param b - The length of each combination.
- * @param cur - The current combination being generated.
+ * @param ub - The upper bound (exclusive) for the numbers to generate combinations from.
+ * @param len - The length of each combination.
+ * @param cur - The current combination being generated (optional).
  * @returns An iterable iterator that generates combinations of numbers.
  */
-function* _combination(a: number, b: number, cur: number[] = []): IterableIterator<number[]> {
+function* _combination(ub: number, len: number, cur: number[] = []): IterableIterator<number[]> {
   const index = cur.length
-  if (index === b) {
+  if (index === len) {
     yield cur
     return
   }
   const start = index ? last(cur) + 1 : 0
-  const end = a - b + index
+  const end = ub - len + index
   for (const next of range(start, end + 1))
-    yield * _combination(a, b, cur.concat(next))
+    yield * _combination(ub, len, cur.concat(next))
 }
 
 /**
  * Generates combinations of elements from an array.
  *
- * @param arr - The input array.
- * @param b - The number of elements in each combination.
- * @returns An iterable of combinations.
+ * @template T - The type of elements in the array.
+ * @param {T[]} arr - The input array.
+ * @param {number} len - The length of each combination.
+ * @returns {Iterable<T[]>} - An iterable of combinations.
  */
-export function* combination<T>(arr: T[], b: number): Iterable<T[]> {
+export function* combination<T>(arr: T[], len: number): Iterable<T[]> {
   const length = arr.length
   const combinations: T[][] = []
 
-  for (const index of _combination(length, b))
+  for (const index of _combination(length, len))
     combinations.push(index.map(i => arr[i]))
 
   yield * combinations
