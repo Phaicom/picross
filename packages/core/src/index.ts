@@ -1,7 +1,6 @@
 import type { Puzzle } from '@picross/shared'
 
 // for test only
-import { readFileSync } from '../../parser/src/utils'
 import { SimpleSolver } from './solver'
 
 export class Game {
@@ -56,14 +55,7 @@ export class Game {
 
     // generate solution base on puzzle clues
     // solver function goes here
-    const solver = new SimpleSolver()
-    console.log(solver)
+    const solver = new SimpleSolver(this.puzzle.clues)
+    this.solution = solver.board
   }
 }
-
-// for test only
-const output = readFileSync('../../parser/output/webpbn000001.json')
-const game = new Game()
-game.setPuzzle(JSON.parse(output as string))
-
-// console.log(game)
