@@ -31,6 +31,7 @@ describe('shared combination function', () => {
   it('combination range [0, 3]', () => {
     const input = Array.from(range(0, 3))
     const result = Array.from(combination(input, 2))
+    expect(result.length).toBe(3)
     expect(result).toStrictEqual([[0, 1], [0, 2], [1, 2]])
   })
 
