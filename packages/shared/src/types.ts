@@ -15,8 +15,8 @@ export interface Puzzle {
  * Represents the clues for a puzzle, organized by rows and columns.
  */
 export interface Clues {
-  rows: ClueRowOrColumn
-  cols: ClueRowOrColumn
+  rows: RowOrColumnClues
+  cols: RowOrColumnClues
 }
 
 /**
@@ -28,7 +28,7 @@ export interface Clues {
  * - The second group has 3 filled cells.
  * - The third group has 1 filled cell, followed by 2 filled cells.
  */
-export type ClueRowOrColumn = number[][]
+export type RowOrColumnClues = number[][]
 
 /**
  * Represents a parser for a puzzle, with a method to parse a string input into a Puzzle.
