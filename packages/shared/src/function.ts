@@ -6,7 +6,7 @@
  * @returns An iterable range of numbers.
  */
 export function* range(start: number, end: number): Iterable<number> {
-  for (let i = start; i <= end; i++)
+  for (let i = start; i < end; i++)
     yield i
 }
 
@@ -42,17 +42,16 @@ function* _combination(a: number, b: number, cur: number[] = []): IterableIterat
   }
   const start = index ? last(cur) + 1 : 0
   const end = a - b + index
-  for (const next of range(start, end))
+  for (const next of range(start, end + 1))
     yield * _combination(a, b, cur.concat(next))
 }
 
 /**
  * Generates combinations of elements from an array.
  *
- * @template T - The type of elements in the array.
- * @param {T[]} arr - The input array.
- * @param {number} b - The number of elements in each combination.
- * @returns {Iterable<T[]>} - An iterable of combinations.
+ * @param arr - The input array.
+ * @param b - The number of elements in each combination.
+ * @returns An iterable of combinations.
  */
 export function* combination<T>(arr: T[], b: number): Iterable<T[]> {
   const length = arr.length
