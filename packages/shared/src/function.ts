@@ -1,5 +1,5 @@
 /**
- * Generates an iterable range of numbers from start to end (inclusive).
+ * Generates an iterable range of numbers from `start` (inclusive) to `end` (exclusive).
  *
  * @param start - The starting number of the range.
  * @param end - The ending number of the range.
