@@ -14,9 +14,9 @@ export class SimpleSolver {
     const noOfRows = this.clues.rows.length
     this.rowsDone = Array(noOfRows).fill(0)
     const noOfCols = this.clues.cols.length
-    this.colsDone = Array(noOfRows).fill(0)
+    this.colsDone = Array(noOfCols).fill(0)
     this.solved = false
-    this.board = Array(noOfRows).fill(0).map(() => Array(noOfCols).fill(0))
+    this.board = Array.from({ length: noOfRows }, () => Array(noOfCols).fill(0))
 
     // step 1: Defining all possible solutions for every row and col
     const rowsPossibilities = this.createPossibilities(this.clues.rows, noOfCols)
@@ -26,7 +26,7 @@ export class SimpleSolver {
       // step 2: Order by lowest
       const lowestRow = this.selectIndexNotDone(rowsPossibilities, 1)
       const lowestCol = this.selectIndexNotDone(colsPossibilities, 0)
-      const lowest = lowestRow.concat(lowestCol).sort((a, b) => a[1] - b[1])
+      const lowest = [...lowestRow, ...lowestCol].sort((a, b) => a[1] - b[1])
 
       // step 3: Get only zeroes or only ones of lowest possibility
       for (const [ind1, _, rowInd] of lowest) {
@@ -42,37 +42,15 @@ export class SimpleSolver {
                 colsPossibilities[ci] = this.removePossibilities(colsPossibilities[ci], ri, val)
               else
                 rowsPossibilities[ri] = this.removePossibilities(rowsPossibilities[ri], ci, val)
-
-              // TODO: make save board for each iteration to show step by step in front end
-              // this.displayBoard()
-              // if (this.savePath !== '') {
-              // this.saveBoard()
-              // this.n += 1
-              // }
             }
           }
           this.updateDone(rowInd, ind1)
         }
       }
       // replace -1 with 0 in board
-      this.board = this.board.map(row => row.map(cell => cell === -1 ? 0 : cell))
+      this.board = this.board.map(row => row.map(cell => (cell === -1 ? 0 : cell)))
       this.checkSolved()
     }
-  }
-
-  createPossibilities(lines: ClueRowOrColumn, noOfLine: number): number[][][] {
-    const possibilities: number[][][] = []
-
-    for (const line of lines) {
-      const groups = line.length
-      const noEmpty = noOfLine - line.reduce((a, b) => a + b, 0) - groups + 1
-      const ones = line.map(cell => Array(cell).fill(1))
-
-      const res = this._createPossibilities(noEmpty, groups, ones)
-      possibilities.push(res)
-    }
-
-    return possibilities
   }
 
   private _createPossibilities(noEmpty: number, groups: number, ones: number[][]): number[][] {
@@ -94,34 +72,42 @@ export class SimpleSolver {
     return resOpts
   }
 
-  selectIndexNotDone(possibilities: any[], rowInd: number) {
-    const s = possibilities.map(i => i.length)
-    if (rowInd)
-      return s.map((n, i) => [i, n, rowInd]).filter((_, i) => this.rowsDone[i] === 0)
-    else
-      return s.map((n, i) => [i, n, rowInd]).filter((_, i) => this.colsDone[i] === 0)
-  }
+  private createPossibilities(lines: ClueRowOrColumn, noOfLine: number): number[][][] {
+    return lines.map((line) => {
+      const groups = line.length
+      const noEmpty = noOfLine - line.reduce((a, b) => a + b, 0) - groups + 1
+      const ones = line.map(cell => Array(cell).fill(1))
 
-  checkDone(rowInd: number, idx: number): any {
-    if (rowInd)
-      return this.rowsDone[idx]
-    else return this.colsDone[idx]
-  }
-
-  getOnlyOneOption(values: number[][]) {
-    const transposedValues = zip(...values)
-    return transposedValues.flatMap((i, n) => {
-      if (!(uniq(i).length === 1))
-        return []
-      return [[n, uniq(i)[0]]] as any
+      return this._createPossibilities(noEmpty, groups, ones)
     })
   }
 
-  removePossibilities(possibilities: number[][], i: number, val: number): number[][] {
+  private selectIndexNotDone(possibilities: any[], rowInd: number) {
+    const s = possibilities.map(i => i.length)
+    const doneArray = rowInd ? this.rowsDone : this.colsDone
+    return s.map((n, i) => [i, n, rowInd]).filter((_, i) => doneArray[i] === 0)
+  }
+
+  private checkDone(rowInd: number, idx: number): boolean {
+    return rowInd ? this.rowsDone[idx] === 1 : this.colsDone[idx] === 1
+  }
+
+  private getOnlyOneOption(values: number[][]) {
+    const transposedValues = zip(...values)
+    return transposedValues.flatMap((i, n) => {
+      const uniqueValues = uniq(i)
+      if (uniqueValues.length === 1)
+        return [[n, uniqueValues[0]]] as any
+
+      return []
+    })
+  }
+
+  private removePossibilities(possibilities: number[][], i: number, val: number): number[][] {
     return possibilities.filter(p => p[i] === val)
   }
 
-  updateDone(rowInd: number, idx: number): void {
+  private updateDone(rowInd: number, idx: number): void {
     let vals: number[]
 
     if (rowInd)
@@ -137,14 +123,8 @@ export class SimpleSolver {
     }
   }
 
-  checkSolved(): void {
-    if (!this.rowsDone.includes(0) && !this.colsDone.includes(0))
+  private checkSolved(): void {
+    if (!this.solved && this.rowsDone.every(done => done === 1) && this.colsDone.every(done => done === 1))
       this.solved = true
   }
 }
-// test
-// left
-const rows = [[4], [6], [3, 2], [2, 1], [2, 1, 1], [3, 1], [4]]
-// top
-const cols = [[5], [7], [3, 2], [2, 1], [2, 1, 1], [2, 1], [3]]
-const solver = new SimpleSolver({ rows, cols })
