@@ -1,7 +1,8 @@
 html,
 body {
   height: 100vh;
-  --uno: bg-base font-sans;
+  --uno: bg-base font-inter tracking-wide text-my-dark-violet-80;
+  overflow: hidden;
 }
 
 * {

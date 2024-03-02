@@ -1,12 +1,7 @@
 <template>
-  <nav px4 py3 text-lg border="b base" flex="~ gap-1 items-center">
-    <NuxtLink to="/" title="Picross" text-4xl>
-      Picross
+  <nav flex="~ gap-1 items-center" h-23 px6 py4>
+    <NuxtLink to="/" title="Picross">
+      <img src="/logo.svg" alt="Picross Logo" width="124">
     </NuxtLink>
-    <div flex="~ gap-1 items-center" ml-auto>
-      <NuxtLink rounded p2 title="Github" hover="bg-active" href="https://github.com/Phaicom/picross" target="_blank">
-        <div i-ph-github-logo-duotone text-3xl />
-      </NuxtLink>
-    </div>
   </nav>
 </template>
