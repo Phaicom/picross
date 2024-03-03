@@ -6,7 +6,7 @@ const rows = ref(5)
 <template>
   <section>
     <!-- board wrapper -->
-    <div class="w-[calc(100vw-3rem)]" max-h-60vh overflow-auto lg:max-h-55vh flex="~ justify-center">
+    <div class="w-[calc(100vw-3rem)]" flex="~ justify-center" select-none overflow-auto max="60vh lg:h-55vh">
       <div flex="~ col" w-min font="400">
         <div flex="~ row">
           <!-- hints rows -->
