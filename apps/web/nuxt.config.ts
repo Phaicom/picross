@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   modules: [
     '@unocss/nuxt',
-    '@nuxt/image',
     '@pinia/nuxt',
     '@nuxt/test-utils/module',
   ],

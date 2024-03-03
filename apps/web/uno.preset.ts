@@ -15,6 +15,8 @@ export default definePreset({
       // 'border-cell': 'border-gray-200 dark:border-secondary',
       'bg-base': 'bg-white',
       'btn': 'rounded transition-all duration-200 text-[12px] h-28px w-60px inline-flex shrink-0 flex-wrap cursor-pointer select-none items-center justify-center text-center font-600 decoration-none',
+      'border-cell': 'border-solid border-my-light-gray',
+      'bg-cell': 'bg-my-light-gray',
       // 'bg-active': 'bg-gray:10',
       // 'bg-faded': 'bg-gray:5',
       // 'bg-cell': 'bg-[#070F2B] dark:bg-gray',
