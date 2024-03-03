@@ -10,7 +10,7 @@ const rows = ref(5)
       <div flex="~ col" w-min font="400">
         <div flex="~ row">
           <!-- hints rows -->
-          <div flex="~ col" min-w-min bg-white rounded="tl-lg bl-lg">
+          <div flex="~ col" min-w-min bg-white rounded="tl-lg bl-lg" class="box-shadow-board">
             <div v-for="(_, i) in rows" :key="i" h-14 min-w-15 flex="~ row justify-end items-center gap-2.5" p-1 border="odd:l-2 t-2 last:odd:b-2 cell" bg="odd:cell" rounded="first:tl-lg last:bl-lg">
               <div v-for="(_, j) in 3" :key="j">
                 {{ j }}
@@ -18,7 +18,7 @@ const rows = ref(5)
             </div>
           </div>
           <!-- cell board -->
-          <div flex="~ col" bg-white>
+          <div flex="~ col" relative bg-white class="box-shadow-board-main">
             <!-- row -->
             <div v-for="(_, i) in rows" :key="i" flex="~ row justify-end items-center" min-w-min>
               <div v-for="(_, j) in cols" :key="j" border="l-2 t-2 last:r-2 cell" h-14 w-14 :class="{ 'border-b-2': i === rows - 1 }">
@@ -28,7 +28,7 @@ const rows = ref(5)
           </div>
         </div>
         <!-- hints rows -->
-        <div flex="~ row" ml-auto min-w-min bg-white rounded="bl-lg br-lg">
+        <div flex="~ row" ml-auto min-w-min bg-white rounded="bl-lg br-lg" class="box-shadow-board">
           <div v-for="(_, i) in cols" :key="i" min-h-15 w-14 flex="~ col justify-start items-center" leading-5 border="l-2 odd:b-2 last:odd:r-2 cell" bg="odd:cell" rounded="first:bl-lg last:br-lg">
             <div v-for="(_, j) in 3" :key="j">
               {{ j }}
@@ -39,3 +39,13 @@ const rows = ref(5)
     </div>
   </section>
 </template>
+
+<style scoped>
+.box-shadow-board {
+  box-shadow: 0px 5px 24px 0px #4b69ff1a;
+}
+
+.box-shadow-board-main {
+  box-shadow: 11px -9px 30px -12px #4b69ff1a;
+}
+</style>

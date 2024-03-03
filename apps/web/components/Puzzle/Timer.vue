@@ -33,7 +33,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section bg="my-light-violet-10 cover bottom 2xl:center no-repeat [url(/timer-bg.svg)]" h-62px w-full rounded-lg p-4>
+  <section bg="my-light-violet-10 cover bottom 2xl:center no-repeat [url(/timer-bg.svg)]" h-62px w-full select-none rounded-lg p-4>
     <div flex="~ items-center">
       <span text-24px font-600>{{ time }}</span>
       <button v-show="!isStartTimer" btn="~ my-blue" ml-auto uppercase @click="startTimer()">
