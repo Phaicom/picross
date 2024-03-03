@@ -155,7 +155,7 @@ export class SimpleSolver {
   /**
    * Removes possibilities from the given array based on the specified index and value.
    * @param poss - The array of possibilities.
-   * @param i - The index to check in each possibility.
+   * @param index - The index to check in each possibility.
    * @param val - The value to compare against in each possibility.
    * @returns A new array with possibilities that have the specified value at the specified index.
    */

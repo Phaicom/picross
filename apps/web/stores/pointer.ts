@@ -9,7 +9,12 @@ export const usePointerStore = defineStore('pointer', () => {
     cellType.value = ct
   }
 
-  return { row, col, cellType, setCellType }
+  function setPointLocation(r: number, c: number) {
+    row.value = r
+    col.value = c
+  }
+
+  return { row, col, cellType, setCellType, setPointLocation }
 })
 
 if (import.meta.hot)

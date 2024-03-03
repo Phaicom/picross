@@ -1,4 +1,4 @@
-import { puzzle001 } from '@picross/shared'
+import { sample } from '@picross/shared'
 import type { Puzzle } from '@picross/shared'
 import { describe, expect, it } from 'vitest'
 import { Game } from '../src'
@@ -6,7 +6,7 @@ import { Game } from '../src'
 describe('game core', () => {
   it('solve 5x5', () => {
     const game = new Game()
-    game.setPuzzle(puzzle001 as Puzzle)
+    game.setPuzzle(sample[0] as Puzzle)
 
     const expectClues = {
       rows: [[4], [4], [1], [1, 1, 1], [1]],
