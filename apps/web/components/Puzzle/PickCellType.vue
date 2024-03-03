@@ -1,14 +1,19 @@
+<script setup lang="ts">
+import { CellTypes } from '@picross/shared'
+
+const pointer = usePointerStore()
+const cellTypes = [CellTypes.Fill, CellTypes.Cross, CellTypes.Circle]
+
+function getCellBorder(cellType: CellTypes) {
+  return pointer.cellType === cellType ? 'border-cell-selected' : 'border-cell'
+}
+</script>
+
 <template>
-  <section mt-4>
+  <section>
     <div rounded-lg bg-white p-4 flex="~ row gap-4" class="shadow-cell-type">
-      <div h-10 w-10 border="2px solid my-light-gray">
-        <div h-full w-full bg-my-dark-blue />
-      </div>
-      <div h-10 w-10 border="2px solid my-light-gray" flex="~ items-center justify-center">
-        <i i-ph-x-bold text="7 my-red" />
-      </div>
-      <div h-10 w-10 border="2px solid my-light-gray" flex="~ items-center justify-center">
-        <i i-ph-circle-bold text="7 my-sky-blue" />
+      <div v-for="(cellType, i) in cellTypes" :key="i" h-10 w-10 cursor-pointer border-2px flex="~ items-center justify-center" :class="getCellBorder(cellType)" @click="pointer.setCellType(cellType)">
+        <PuzzleCellType :cell-type="cellType" />
       </div>
     </div>
   </section>

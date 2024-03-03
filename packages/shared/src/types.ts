@@ -44,3 +44,13 @@ export interface Parser {
    */
   parse: (input: string) => Puzzle
 }
+
+/**
+ * Represents the types of cells in a picross grid.
+ */
+export enum CellTypes {
+  Empty,
+  Fill,
+  Cross,
+  Circle,
+}

@@ -12,8 +12,8 @@ onMounted(() => {
       <h1 v-show="puzzle.isWin" text="3xl primary" class="keyframes-bounce-in animate-[bounce-in_1s_ease-in-out]">
         You're the WINNER!! 😍✨🔥
       </h1>
-      <PuzzleBoard />
-      <PuzzleCellType />
+      <!-- <PuzzleBoard /> -->
+      <!-- <PuzzleCellType /> -->
     </div>
     <PuzzleSettings @reset="puzzle.reset()" @generate="puzzle.generate()" />
   </div>

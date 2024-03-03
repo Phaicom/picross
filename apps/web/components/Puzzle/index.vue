@@ -9,7 +9,7 @@
       <!-- Board section -->
       <PuzzleBoard />
       <!-- Cell type choosing section -->
-      <PuzzlePickCellType />
+      <PuzzlePickCellType mt-4 />
     </div>
   </div>
 </template>
