@@ -9,6 +9,6 @@
     <img src="/c1.svg">
   </div>
   <div absolute bottom-0 right-0>
-    <img src="/c3.svg" absolute bottom-0 right-0>
+    <img src="/c3.svg">
   </div>
 </template>
