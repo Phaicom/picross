@@ -17,9 +17,7 @@ export const usePuzzleStore = defineStore('puzzle', () => {
   let interval: NodeJS.Timeout | null = null
 
   const isWin = computed(() => {
-    const trimGrid = grid.map(row => row.map(col => col === 1 ? 1 : 0))
-
-    return trimGrid.length > 0 && solution.length > 0 && JSON.stringify(trimGrid) === JSON.stringify(solution)
+    return trimGrid.length > 0 && solution.length > 0 && JSON.stringify(trimGrid(grid)) === JSON.stringify(solution)
   })
 
   function reset(puzzle: Puzzle = {} as Puzzle) {
@@ -58,11 +56,15 @@ export const usePuzzleStore = defineStore('puzzle', () => {
       counter += 1
       resetBoard(solveSteps[counter])
       if (counter === solveSteps.length - 1) {
-        resetBoard(solution)
+        resetBoard(trimGrid(grid))
         clearInterval(interval as NodeJS.Timeout)
         isStartSolver.value = false
       }
     }, 300)
+  }
+
+  function trimGrid(g: number[][]): number[][] {
+    return g.map(row => row.map(col => col === 1 ? 1 : 0))
   }
 
   onUnmounted(() => {
