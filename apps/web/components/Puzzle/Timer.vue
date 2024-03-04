@@ -1,12 +1,12 @@
 <script setup lang="ts">
+const puzzle = usePuzzleStore()
+
 const time = ref('00:00:00')
-const isStartTimer = ref(false)
 let interval: NodeJS.Timeout | null = null
 
 function startTimer() {
   time.value = '00:00:00'
   const startTime = new Date().getTime()
-  isStartTimer.value = true
   interval = setInterval(() => {
     const currentTime = new Date().getTime()
     const elapedTime = currentTime - startTime
@@ -18,7 +18,6 @@ function startTimer() {
 }
 
 function stopTimer() {
-  isStartTimer.value = false
   clearInterval(interval as NodeJS.Timeout)
   interval = null
 }
@@ -27,8 +26,24 @@ function pad(num: number) {
   return (num < 10 ? '0' : '') + num
 }
 
+function resetBoard() {
+  stopTimer()
+  startTimer()
+  puzzle.resetBoard()
+}
+
+function startSolver() {
+  puzzle.startSolver()
+  stopTimer()
+  time.value = '00:00:00'
+}
+
+onMounted(() => {
+  startTimer()
+})
+
 onUnmounted(() => {
-  clearInterval(interval as NodeJS.Timeout)
+  stopTimer()
 })
 </script>
 
@@ -36,12 +51,15 @@ onUnmounted(() => {
   <section bg="my-light-violet-10 cover bottom 2xl:center no-repeat [url(/timer-bg.svg)]" h-62px w-full select-none rounded-lg p-4>
     <div flex="~ items-center">
       <span text-24px font-600>{{ time }}</span>
-      <button v-show="!isStartTimer" btn="~ my-blue" ml-auto uppercase @click="startTimer()">
-        start
-      </button>
-      <button v-show="isStartTimer" btn="~ my-red" ml-auto uppercase @click="stopTimer()">
-        stop
-      </button>
+      <div ml-auto flex="~ row gap-2">
+        <button btn="~ my-blue" uppercase :disabled="puzzle.isStartSolver" @click="startSolver()">
+          <div v-if="puzzle.isStartSolver" i-ph-spinner-bold animate-spin text-lg />
+          <span v-else>solve</span>
+        </button>
+        <button btn="~ my-red" uppercase @click="resetBoard()">
+          reset
+        </button>
+      </div>
     </div>
   </section>
 </template>

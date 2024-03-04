@@ -12,6 +12,7 @@ export class SimpleSolver {
   colsDone: number[]
   solved: boolean
   board: number[][]
+  solveSteps: number[][][]
 
   /**
    * Creates an instance of the SimpleSolver class.
@@ -25,6 +26,7 @@ export class SimpleSolver {
     this.colsDone = Array(numCols).fill(0)
     this.solved = false
     this.board = Array.from({ length: numRows }, () => Array(numCols).fill(0))
+    this.solveSteps = []
 
     /**
      * An array of possibilities for each row or column in the picross puzzle.
@@ -58,8 +60,10 @@ export class SimpleSolver {
                 rowsPoss[rowIndex] = this.removePossibilities(rowsPoss[rowIndex], colIndex, val)
             }
           }
+
           this.updateDone(isRow, i)
         }
+        this.solveSteps.push(this.board.map(row => row.map(cell => (cell === -1 ? 2 : cell))))
       }
       // replace -1 with 0 in board
       this.board = this.board.map(row => row.map(cell => (cell === -1 ? 0 : cell)))

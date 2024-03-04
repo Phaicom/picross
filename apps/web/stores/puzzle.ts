@@ -11,6 +11,10 @@ export const usePuzzleStore = defineStore('puzzle', () => {
   const clues = reactive<Clues>({ rows: [], cols: [] })
   const grid = reactive<number[][]>([])
   const solution = reactive<number[][]>([])
+  const solveSteps = reactive<number[][][]>([])
+  const isStartSolver = ref(false)
+
+  let interval: NodeJS.Timeout | null = null
 
   const isWin = computed(() => {
     const trimGrid = grid.map(row => row.map(col => col === 1 ? 1 : 0))
@@ -34,9 +38,39 @@ export const usePuzzleStore = defineStore('puzzle', () => {
     grid.push(...game.grid)
     solution.splice(0, solution.length)
     solution.push(...game.solution)
+    solveSteps.splice(0, solveSteps.length)
+    solveSteps.push(...game.solveSteps)
+    isStartSolver.value = false
   }
 
-  return { catalogue, title, author, width, height, clues, grid, solution, isWin, reset }
+  function resetBoard(g: number[][] = []) {
+    grid.splice(0, grid.length)
+    const empty = Array.from({ length: height.value }, () => Array.from({ length: width.value }, () => 0))
+    grid.push(...(g.length > 0 ? g : empty))
+  }
+
+  function startSolver() {
+    clearInterval(interval as NodeJS.Timeout)
+    let counter = -1
+    isStartSolver.value = true
+    resetBoard()
+    interval = setInterval(() => {
+      counter += 1
+      resetBoard(solveSteps[counter])
+      if (counter === solveSteps.length - 1) {
+        resetBoard(solution)
+        clearInterval(interval as NodeJS.Timeout)
+        isStartSolver.value = false
+      }
+    }, 300)
+  }
+
+  onUnmounted(() => {
+    if (interval)
+      clearInterval(interval)
+  })
+
+  return { catalogue, title, author, width, height, clues, grid, solution, solveSteps, isStartSolver, isWin, reset, resetBoard, startSolver }
 })
 
 if (import.meta.hot)

@@ -27,7 +27,7 @@ export default definePreset({
     },
     // [/^border-cell-(.*)$/, ([, c]) => `border-${c}-secondary dark:border-${c}-tertiary`],
     // my-blue hover:my-blue-60 active:my-blue-120
-    [/^btn-(.*)$/, ([, c]) => `bg-${c} hover:bg-${c}-60 active:bg-${c}-120 text-white`],
+    [/^btn-(.*)$/, ([, c]) => `bg-${c} hover:bg-${c}-60 active:bg-${c}-120 text-white disabled:bg-${c}-60`],
   ],
   theme: {
     colors: {
