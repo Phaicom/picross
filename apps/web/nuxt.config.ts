@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxt/test-utils/module',
+    '@nuxt/image',
   ],
   app: {
     head: {
